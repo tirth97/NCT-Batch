@@ -1,0 +1,63 @@
+version = '1.0'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.akhikhl.gretty:gretty:1.+"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'org.akhikhl.gretty'
+
+gretty {
+    // supported values:
+    // 'jetty7', 'jetty8', 'jetty9', 'tomcat7', 'tomcat8'
+    servletContainer = 'jetty9'
+  	httpPort = 8083
+  	httpsPort = 8445
+//  	httpPort = 80
+//  	httpsPort = 443
+  	httpsEnabled = false
+  	contextPath = '/NCT-Batch'
+}
+
+repositories {
+    // Use 'jcenter' for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.+'
+    compileOnly 'org.apache.logging.log4j:log4j-api:2.8.+'
+	compile 'org.springframework:spring-webmvc:4.+'
+    compile 'org.springframework:spring-jdbc:4.+'
+	compile 'javax.servlet:jstl:1.2'
+    
+    compile 'org.apache.activemq:activemq-core:5.+'
+	compile 'javax.jms:javax.jms-api:2.+'
+	compile 'org.springframework:spring-jms:4.3.+'
+	compile 'org.apache.hadoop:hadoop-common:2.8.+'
+	compile 'org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.8.+'
+//	compile 'org.apache.hadoop:hadoop-examples:1.2.1'
+	
+    compile 'org.apache.commons:commons-dbcp2:2.+'
+//    compile 'com.amazonaws:aws-java-sdk:1.+'
+//    compile 'com.fasterxml.jackson.core:jackson-core:2.+'
+//    compile 'com.google.code.gson:gson:2.+'
+    runtime 'org.apache.logging.log4j:log4j-core:2.8.+'
+    runtime 'org.xerial:sqlite-jdbc:3.+'
+//    runtime 'com.github.jai-imageio:jai-imageio-core:1.+'
+	runtime 'org.eclipse.jetty:jetty-servlets:9.2.+'
+
+    // Declare the dependency for your favourite test framework you want to use in your tests.
+    // TestNG is also supported by the Gradle Test task. Just change the
+    // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+    // 'test.useTestNG()' to your build script.
+//    testCompile 'junit:junit:4.12'
+}

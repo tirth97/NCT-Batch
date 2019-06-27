@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<Configure id='nct-batch-wac' class="org.eclipse.jetty.webapp.WebAppContext">
+  <New id="connectionFactory" class="org.eclipse.jetty.plus.jndi.Resource">
+    <Arg>
+      <Ref id='nct-batch-wac' />
+    </Arg>
+    <Arg>jms/ConnectionFactory</Arg>
+    <Arg>
+      <New class="org.apache.activemq.ActiveMQConnectionFactory">
+        <Arg>tcp://localhost:61616</Arg>
+      </New>
+    </Arg>
+  </New>
+  <New id="jobQueue" class="org.eclipse.jetty.plus.jndi.Resource">
+    <Arg>jms/queue/Job</Arg>
+    <Arg>
+      <New class="org.apache.activemq.command.ActiveMQQueue">
+        <Arg>jms/queue/Job</Arg>
+      </New>
+    </Arg>
+  </New>
+  <New id="resultQueue" class="org.eclipse.jetty.plus.jndi.Resource">
+    <Arg>jms/queue/Result</Arg>
+    <Arg>
+      <New class="org.apache.activemq.command.ActiveMQQueue">
+        <Arg>jms/queue/Result</Arg>
+      </New>
+    </Arg>
+  </New>
+</Configure>
