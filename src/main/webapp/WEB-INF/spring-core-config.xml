@@ -26,10 +26,18 @@
 		http://www.springframework.org/schema/jms  
 		http://www.springframework.org/schema/jms/spring-jms-3.0.xsd">
 
-	<bean id="propertyConfigurer" class="batch.ui.web.JdbcPropertyPlaceholderConfigurer">
-	    <property name="location">
-	       <value>/WEB-INF/config.properties</value>
-	    </property>
+	<bean id="propertyConfigurerJDBC" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true"/>
+		<property name="location">
+			<value>/WEB-INF/config.properties</value>
+		</property>
+	</bean>
+
+	<bean id="propertyConfigurerJMS" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true"/>
+		<property name="location">
+			<value>/WEB-INF/jms.properties</value>
+		</property>
 	</bean>
 	
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
@@ -41,7 +49,7 @@
 	<context:component-scan base-package="batch.service" />
  
 	<bean id="connectionFactory" class="org.apache.activemq.spring.ActiveMQConnectionFactory">
-		<property name="brokerURL" value="tcp://localhost:61616" />
+		<property name="brokerURL" value="${jms.broker.url}" />
 	</bean>
  
 	<jms:listener-container container-type="default"
