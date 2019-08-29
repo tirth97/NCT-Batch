@@ -37,6 +37,7 @@ import batch.service.MRExecutorService;
 import batch.service.dto.DataTransferObject;
 import batch.service.dto.FeatureExtractMatchDTO;
 import batch.service.dto.FeatureExtractionDTO;
+import batch.service.dto.FromHdfsDTO;
 import batch.service.dto.ImageJFFTDTO;
 import batch.service.dto.ImageJGaussianDTO;
 import batch.service.dto.ImageJThresholdDTO;
@@ -44,6 +45,7 @@ import batch.service.dto.ImageStitchingDTO;
 import batch.service.dto.MatlabGaussianDTO;
 import batch.service.dto.MatrixMultDTO;
 import batch.service.dto.RetileDTO;
+import batch.service.dto.ToHdfsDTO;
 import batch.service.dto.WordCountDTO;
 import batch.service.dto.ZoomLevelDTO;
 import batch.util.JMSMessage;
@@ -122,6 +124,18 @@ public class JobQueueListener implements MessageListener {
 						zl.getIntensity() };
 
 				result = mrExecutorService.exeZoomLevel(parameters);
+
+			} else if (jobName.equalsIgnoreCase("to-hdfs")) {
+				
+				FromHdfsDTO toHdfs = obj.readValue(request, FromHdfsDTO.class);
+				parameters = new String[] {"toHdfs",toHdfs.getFrom(),toHdfs.getTo()};
+				result = mrExecutorService.exeToHdfs(parameters);
+
+			} //TODO
+			else if (jobName.equalsIgnoreCase("from-hdfs")) {
+				ToHdfsDTO toHdfs = obj.readValue(request, ToHdfsDTO.class);
+				parameters = new String[] {"fromHdfs",toHdfs.getFrom(),toHdfs.getTo()};
+				result = mrExecutorService.exeToHdfs(parameters);
 
 			} else if (jobName.equalsIgnoreCase("retiling")){
 
