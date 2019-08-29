@@ -2,6 +2,7 @@ package batch.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.mortbay.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -508,6 +509,57 @@ public class MRExecutorService {
 			return new JMSMessage(null, "Zoom Level Job Failed.", statusValues.ERROR);
 		}
 		return new JMSMessage(null, "Zoom Level Job Completed.", statusValues.SUCCESS);
+	}
+
+	/**
+	 * Execute dist-ftp MapReduce job to copy to HDFS
+	 * @param varArgs
+	 */
+	public JMSMessage exeToHdfs(final String [] varArgs) {
+		final String jarName = pluginRoot + "/dist-ftp/dist-ftp-all.jar";
+
+		final ProcessBuilder processBuilder = new ProcessBuilder(packVarArgs(hadoopRoot + "/bin/hadoop", "jar", jarName, varArgs));
+		final ProcessExecutor processExecutor = new ProcessExecutor(processBuilder);
+		try {
+			final StdOutErrDTO output = processExecutor.execute();
+			if (output.getStderr() != null && !output.getStderr().isEmpty()) {
+				logger.info("\n" + output.getStderr());
+			}
+			if (output.getStdout() != null && !output.getStdout().isEmpty()) {
+				logger.info("\n" + output.getStdout());
+			}
+		} catch (final Exception e) {
+			logger.error("Process failed.", e);
+			return new JMSMessage(null, "To Hdfs Job Failed.", statusValues.ERROR);
+		}
+		Log.info("Job Complete");
+		return new JMSMessage(null, "To Hdfs Job Completed.", statusValues.SUCCESS);
+	}
+
+
+	/**
+	 * Execute dist-ftp MapReduce job to copy from HDFS
+	 * @param varArgs
+	 */
+	public JMSMessage exeFromHdfs(final String [] varArgs) {
+		final String jarName = pluginRoot + "/dist-ftp/dist-ftp-all.jar";
+
+		final ProcessBuilder processBuilder = new ProcessBuilder(packVarArgs(hadoopRoot + "/bin/hadoop", "jar", jarName, varArgs));
+		final ProcessExecutor processExecutor = new ProcessExecutor(processBuilder);
+		try {
+			final StdOutErrDTO output = processExecutor.execute();
+			if (output.getStderr() != null && !output.getStderr().isEmpty()) {
+				logger.info("\n" + output.getStderr());
+			}
+			if (output.getStdout() != null && !output.getStdout().isEmpty()) {
+				logger.info("\n" + output.getStdout());
+			}
+		} catch (final Exception e) {
+			logger.error("Process failed.", e);
+			return new JMSMessage(null, "From Hdfs Job Failed.", statusValues.ERROR);
+		}
+		Log.info("Job Complete");
+		return new JMSMessage(null, "From Hdfs Job Completed.", statusValues.SUCCESS);
 	}
 
 }
