@@ -38,6 +38,8 @@ import batch.service.dto.DataTransferObject;
 import batch.service.dto.FeatureExtractMatchDTO;
 import batch.service.dto.FeatureExtractionDTO;
 import batch.service.dto.FromHdfsDTO;
+import batch.service.dto.HdfsCopyDTO;
+import batch.service.dto.HdfsDeleteDTO;
 import batch.service.dto.ImageJFFTDTO;
 import batch.service.dto.ImageJGaussianDTO;
 import batch.service.dto.ImageJThresholdDTO;
@@ -133,15 +135,27 @@ public class JobQueueListener implements MessageListener {
 
 			} //TODO
 			else if (jobName.equalsIgnoreCase("from-hdfs")) {
-				ToHdfsDTO toHdfs = obj.readValue(request, ToHdfsDTO.class);
-				parameters = new String[] {"fromHdfs",toHdfs.getFrom(),toHdfs.getTo()};
-				result = mrExecutorService.exeToHdfs(parameters);
+				ToHdfsDTO fromHdfs = obj.readValue(request, ToHdfsDTO.class);
+				parameters = new String[] {"fromHdfs",fromHdfs.getFrom(),fromHdfs.getTo()};
+				result = mrExecutorService.exeFromHdfs(parameters);
 
-			} else if (jobName.equalsIgnoreCase("retiling")){
+			}//TODO
+			else if (jobName.equalsIgnoreCase("hdfs-copy")) {
+				HdfsCopyDTO hdfsHelper = obj.readValue(request, HdfsCopyDTO.class);
+				parameters = new String[] {"hdfsCopy",hdfsHelper.getFrom(),hdfsHelper.getTo()};
+				result = mrExecutorService.exeHdfsCopy(parameters);
+
+			} else if (jobName.equalsIgnoreCase("hdfs-delete")) {
+				HdfsDeleteDTO hdfsHelper = obj.readValue(request, HdfsDeleteDTO.class);
+				parameters = new String[] {"hdfsDelete",hdfsHelper.getFrom()};
+				result = mrExecutorService.exeHdfsDelete(parameters);
+
+			}
+			else if (jobName.equalsIgnoreCase("retiling")){
 
 				RetileDTO retileDTO = obj.readValue(request, RetileDTO.class);
-				parameters = new String[] { retileDTO.getInputDir(), retileDTO.getOutputDir(),
-								retileDTO.getOrigin(), retileDTO.getTileDim(),
+				parameters = new String[] { retileDTO.getInputStackDir(),
+								retileDTO.getInputCsvDir(), retileDTO.getOutputDir(), retileDTO.getTileDim(),
 								retileDTO.getIntensity() };
 
 				result = mrExecutorService.exeRetile(parameters);

@@ -1,45 +1,46 @@
 package batch.service.dto;
 
 public class RetileDTO extends DataTransferObject {
+  // input directory for stack images
+  private  String inputStackDir;
   // input directory
-  private  String inputDir;
+  private  String inputCsvDir;
   // output directory
   private  String outputDir;
-  // global tile origin
-  private  String origin;
-  // dimentions of input tiles
+  // dimensions of input tiles
   private  String tileDim;
   // dummy tile pixel intensity
   private  String intensity;
 
   public RetileDTO() {
     super("retiling");
-    this.inputDir = null;
+    this.inputStackDir = null;
+    this.inputCsvDir = null;
     this.outputDir = null;
-    this.origin = null;
     this.tileDim = null;
     this.intensity = null;
   }
 
-  public RetileDTO(String inputDir, String outputDir, String origin, String tileDim, String intensity) {
+  public RetileDTO(String inputStackDir, String inputCsvDir, String outputDir, String tileDim,
+                   String intensity) {
     super("retiling");
-    this.inputDir = inputDir;
+    this.inputStackDir = inputStackDir;
+    this.inputCsvDir = inputCsvDir;
     this.outputDir = outputDir;
-    this.origin = origin;
     this.tileDim = tileDim;
     this.intensity = intensity;
   }
 
-  public String getInputDir() {
-    return inputDir;
+  public String getInputStackDir() {
+    return inputStackDir;
+  }
+
+  public String getInputCsvDir() {
+    return inputCsvDir;
   }
 
   public String getOutputDir() {
     return outputDir;
-  }
-
-  public String getOrigin() {
-    return origin;
   }
 
   public String getTileDim() {
@@ -53,9 +54,9 @@ public class RetileDTO extends DataTransferObject {
   @Override
   public String toString() {
     return "RetileDTO [" +
-            "inputDir='" + inputDir + '\'' +
+            "inputStackDir='" + inputStackDir + '\'' +
+            ", inputCsvDir='" + inputCsvDir + '\'' +
             ", outputDir='" + outputDir + '\'' +
-            ", origin='" + origin + '\'' +
             ", tileDim='" + tileDim + '\'' +
             ", intensity='" + intensity + '\'' +
             ']';

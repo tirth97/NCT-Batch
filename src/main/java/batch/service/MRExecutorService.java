@@ -562,4 +562,53 @@ public class MRExecutorService {
 		return new JMSMessage(null, "From Hdfs Job Completed.", statusValues.SUCCESS);
 	}
 
+	/**
+	 * Execute hdfs-helper job to copy betweem HDFS
+	 * @param varArgs
+	 */
+	public JMSMessage exeHdfsCopy(final String [] varArgs) {
+		final String jarName = pluginRoot + "/hdfs-helper/hdfs-helper-all.jar";
+
+		final ProcessBuilder processBuilder = new ProcessBuilder(packVarArgs(hadoopRoot + "/bin/hadoop", "jar", jarName, varArgs));
+		final ProcessExecutor processExecutor = new ProcessExecutor(processBuilder);
+		try {
+			final StdOutErrDTO output = processExecutor.execute();
+			if (output.getStderr() != null && !output.getStderr().isEmpty()) {
+				logger.info("\n" + output.getStderr());
+			}
+			if (output.getStdout() != null && !output.getStdout().isEmpty()) {
+				logger.info("\n" + output.getStdout());
+			}
+		} catch (final Exception e) {
+			logger.error("Process failed.", e);
+			return new JMSMessage(null, "Copy between Hdfs Job Failed.", statusValues.ERROR);
+		}
+		Log.info("Job Complete");
+		return new JMSMessage(null, "Copy between Hdfs Job Completed.", statusValues.SUCCESS);
+	}
+
+	/**
+	 * Execute hdfs-helper job to delete recursively from HDFS path
+	 * @param varArgs
+	 */
+	public JMSMessage exeHdfsDelete(final String [] varArgs) {
+		final String jarName = pluginRoot + "/hdfs-helper/hdfs-helper-all.jar";
+
+		final ProcessBuilder processBuilder = new ProcessBuilder(packVarArgs(hadoopRoot + "/bin/hadoop", "jar", jarName, varArgs));
+		final ProcessExecutor processExecutor = new ProcessExecutor(processBuilder);
+		try {
+			final StdOutErrDTO output = processExecutor.execute();
+			if (output.getStderr() != null && !output.getStderr().isEmpty()) {
+				logger.info("\n" + output.getStderr());
+			}
+			if (output.getStdout() != null && !output.getStdout().isEmpty()) {
+				logger.info("\n" + output.getStdout());
+			}
+		} catch (final Exception e) {
+			logger.error("Process failed.", e);
+			return new JMSMessage(null, "Delete from Hdfs Job Failed.", statusValues.ERROR);
+		}
+		Log.info("Job Complete");
+		return new JMSMessage(null, "Delete from Hdfs Job Completed.", statusValues.SUCCESS);
+	}
 }
