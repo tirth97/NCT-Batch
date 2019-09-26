@@ -8,7 +8,7 @@
     <Arg>jms/ConnectionFactory</Arg>
     <Arg>
       <New class="org.apache.activemq.ActiveMQConnectionFactory">
-        <Arg>tcp://activemq.default.svc.cluster.local:61616</Arg>
+        <Arg>tcp://activemq:61616</Arg>
       </New>
     </Arg>
   </New>
