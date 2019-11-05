@@ -25,8 +25,6 @@ public class ZoomLevelDTO extends DataTransferObject {
     private  String inputDir;
     // output directory
     private  String outputDir;
-    // global tile origin 
-    private  String origin;
     // dimentions of input tiles
     private  String tileDim;
     // dummy tile pixel intensity
@@ -36,7 +34,6 @@ public class ZoomLevelDTO extends DataTransferObject {
         super("zoom-level");
         this.inputDir = null;
         this.outputDir = null;
-        this.origin = null;
         this.tileDim = null;
         this.intensity = null;
     }
@@ -45,7 +42,6 @@ public class ZoomLevelDTO extends DataTransferObject {
         super("zoom-level");
         this.inputDir = inputDir;
         this.outputDir = outputDir;
-        this.origin = origin;
         this.tileDim = tileDim;
         this.intensity = intensity;
     }
@@ -56,10 +52,6 @@ public class ZoomLevelDTO extends DataTransferObject {
 
     public String getOutputDir() {
         return outputDir;
-    }
-
-    public String getOrigin() {
-        return origin;
     }
 
     public String getTileDim() {
@@ -75,7 +67,6 @@ public class ZoomLevelDTO extends DataTransferObject {
         return "ZoomLevelDTO [" +
                 "inputDir='" + inputDir + '\'' +
                 ", outputDir='" + outputDir + '\'' +
-                ", origin='" + origin + '\'' +
                 ", tileDim='" + tileDim + '\'' +
                 ", intensity='" + intensity + '\'' +
                 ']';

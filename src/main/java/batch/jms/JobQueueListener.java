@@ -122,7 +122,7 @@ public class JobQueueListener implements MessageListener {
 			} else if (jobName.equalsIgnoreCase("zoom-level")) {
 
 				ZoomLevelDTO zl = obj.readValue(request, ZoomLevelDTO.class);
-				parameters = new String[] { zl.getInputDir(), zl.getOutputDir(), zl.getOrigin(), zl.getTileDim(),
+				parameters = new String[] { zl.getInputDir(), zl.getOutputDir(), zl.getTileDim(),
 						zl.getIntensity() };
 
 				result = mrExecutorService.exeZoomLevel(parameters);
