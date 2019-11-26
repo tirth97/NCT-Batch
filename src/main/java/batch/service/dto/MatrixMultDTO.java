@@ -19,8 +19,7 @@ package batch.service.dto;
  * Defines and contains matrix multiplication job parameters.
  * @author Rundong Li
  */
-public class MatrixMultDTO extends DataTransferObject {
-
+public class MatrixMultDTO extends DataTransferObject{
 	/** Input directories. */
 	private final String inputDir1;
 	private final String inputDir2;
@@ -30,9 +29,8 @@ public class MatrixMultDTO extends DataTransferObject {
 	/** properties file */
 	private final String propFile;
 
-
 	public MatrixMultDTO() {
-		super("matrix-mult");
+		super("matrix-mult","/matrix-mult/seq-pair-mm-recordlimited.jar",null);
 		this.inputDir1 = null;
 		this.inputDir2 = null;
 		this.intermResultDir = null;
@@ -42,7 +40,7 @@ public class MatrixMultDTO extends DataTransferObject {
 
 	public MatrixMultDTO(final String inputDir1, final String inputDir2, 
 			final String intermResultDir, final String outputDir, final String propFile) {
-		super("matrix-mult");
+		super("matrix-mult","/matrix-mult/seq-pair-mm-recordlimited.jar",null);
 		this.inputDir1 = inputDir1;
 		this.inputDir2 = inputDir2;
 		this.intermResultDir = intermResultDir;
@@ -75,5 +73,11 @@ public class MatrixMultDTO extends DataTransferObject {
 		return "MatrixMultDTO [inputDirs=" + inputDir1 + "," + inputDir2 
 				+ ", outputDirs=" + intermResultDir + "," + outputDir
 				+ ", propFile=" + propFile + "]";
+	}
+
+	@Override
+	public String[] getCommandParameters() {
+		return  new String[] { this.getInputDir1(), this.getInputDir2(), this.getIntermResultDir(),
+			this.getOutputDir(), this.getPropFile() };
 	}
 }

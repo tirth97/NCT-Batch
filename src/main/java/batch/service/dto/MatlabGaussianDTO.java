@@ -17,9 +17,10 @@ package batch.service.dto;
 
 /**
  * Defines and contains matrix multiplication job parameters.
+ * 
  * @author Rundong Li
  */
-public class MatlabGaussianDTO extends DataTransferObject{
+public class MatlabGaussianDTO extends DataTransferObject {
 	/** Input directories. */
 	private final String filterInput;
 	/** Output directories. */
@@ -28,18 +29,8 @@ public class MatlabGaussianDTO extends DataTransferObject{
 	private final String gaussianSigmaX, gaussianSigmaY, gaussianSigmaZ;
 	private final String imageName;
 
-//	public MatlabGaussianDTO(final String inputDir, final String outputDir, final String sigmaX, final String sigmaY, final String sigmaZ) {
-//		this.filterInput = inputDir;
-//		this.filterOutput = outputDir;
-//		this.gaussianSigmaX = sigmaX;
-//		this.gaussianSigmaY = sigmaY;
-//		this.gaussianSigmaZ = sigmaZ;
-//		this.imageName = "gaussian no name";
-//	}
-
-
-public MatlabGaussianDTO() {
-		super("matlab-gaussian");
+	public MatlabGaussianDTO() {
+		super("matlab-gaussian","/image-filter/WholeImageMatlabGaussian.jar","hadoop.wholefile.WholeImageMatlabGaussian");
 		this.filterInput = null;
 		this.filterOutput = null;
 		this.gaussianSigmaX = null;
@@ -47,10 +38,10 @@ public MatlabGaussianDTO() {
 		this.gaussianSigmaZ = null;
 		this.imageName = null;
 	}
-	
-	public MatlabGaussianDTO(final String inputDir, final String outputDir, final String sigmaX, final String sigmaY, final String sigmaZ, 
-			final String imageName) {
-		super("matlab-gaussian");
+
+	public MatlabGaussianDTO(final String inputDir, final String outputDir, final String sigmaX, final String sigmaY,
+			final String sigmaZ, final String imageName) {
+		super("matlab-gaussian","/image-filter/WholeImageMatlabGaussian.jar","hadoop.wholefile.WholeImageMatlabGaussian");
 		this.filterInput = inputDir;
 		this.filterOutput = outputDir;
 		this.gaussianSigmaX = sigmaX;
@@ -66,27 +57,33 @@ public MatlabGaussianDTO() {
 	public String getOutputDir() {
 		return filterOutput;
 	}
-	
+
 	public String getSigmaX() {
 		return gaussianSigmaX;
 	}
-	
+
 	public String getSigmaY() {
 		return gaussianSigmaY;
 	}
-	
+
 	public String getSigmaZ() {
 		return gaussianSigmaZ;
 	}
-	
+
 	public String getImageName() {
 		return imageName;
 	}
 
 	@Override
 	public String toString() {
-		return "MatlabGaussianDTO [filterInput=" + filterInput + ", filterOutput=" + filterOutput
-				+ ", sigmaX=" + gaussianSigmaX + ", sigmaY=" + gaussianSigmaY + ", sigmaZ=" + gaussianSigmaZ
-				+ ", imageName=" + imageName + "]";
+		return "MatlabGaussianDTO [filterInput=" + filterInput + ", filterOutput=" + filterOutput + ", sigmaX="
+				+ gaussianSigmaX + ", sigmaY=" + gaussianSigmaY + ", sigmaZ=" + gaussianSigmaZ + ", imageName="
+				+ imageName + "]";
+	}
+
+	@Override
+	public String[] getCommandParameters() {
+		return new String[] { this.getInputDir(), this.getOutputDir(), this.getSigmaX(), this.getSigmaY(),
+			this.getSigmaZ(), this.getImageName() };
 	}
 }

@@ -41,8 +41,8 @@ public class ImageStitchingDTO extends DataTransferObject{
     private final String nearestNeighborClass;
     private final String bin;
 
-    public ImageStitchingDTO(){
-        super("image-stitching");
+    public ImageStitchingDTO() {
+        super("image-stitching","/image-stitching/image-stitching-mr.jar","neu.nctracer.driver.Driver");
         this.inputDir = null;
         this.outputDir = null;
         this.matchCalculatorClass = null;
@@ -52,13 +52,13 @@ public class ImageStitchingDTO extends DataTransferObject{
         this.epsilonRange = null;
         this.nearestNeighborThresholdDistance = null;
         this.nearestNeighborClass = null;
-        this.bin = null;  
+        this.bin = null;
     }
 
     public ImageStitchingDTO(String inputDir, String outputDir, String matchCalculatorClass, String offset,
                              String gridDimension, String k, String epsilonRange,
                              String nearestNeighborThresholdDistance, String nearestNeighborClass, String bin) {
-        super("image-stitching");
+        super("image-stitching","/image-stitching/image-stitching-mr.jar","neu.nctracer.driver.Driver");
         this.inputDir = inputDir;
         this.outputDir = outputDir;
         this.matchCalculatorClass = matchCalculatorClass;
@@ -125,5 +125,12 @@ public class ImageStitchingDTO extends DataTransferObject{
                 ", nearestNeighborClass='" + nearestNeighborClass + '\'' +
                 ", bin='" + bin + '\'' +
                 ']';
+    }
+
+    @Override
+    public String[] getCommandParameters() {
+        return new String[] { this.getInputDir(), this.getOutputDir(), this.getMatchCalculatorClass(),
+            this.getOffset(), this.getGridDimension(), this.getK(), this.getEpsilonRange(),
+            this.getNearestNeighborThresholdDistance(), this.getNearestNeighborClass(), this.getBin() };
     }
 }

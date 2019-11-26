@@ -28,8 +28,8 @@ public class ImageJFFTDTO extends DataTransferObject{
 	private final String fftLargeDia, fftSmallDia, fftChoices, fftTolDia, fftScalingDia, fftSaturateDia;
 	private final String imageID, imageName;
 
-	public ImageJFFTDTO(){
-		super("imagej-fft");
+	public ImageJFFTDTO() {
+		super("imagej-fft","/image-filter/??.jar","hadoop.??");
 		this.ijfilterInput = null;
 		this.ijfilterOutput = null;
 		this.fftLargeDia = null;
@@ -40,13 +40,12 @@ public class ImageJFFTDTO extends DataTransferObject{
 		this.fftSaturateDia = null;
 		this.imageID = null;
 		this.imageName = null;
-
 	}
 
 	public ImageJFFTDTO(final String inputDir, final String outputDir, 
 			final String largeDia, final String smallDia, final String choices, 
 			final String tolDia, final String scalingDia, final String saturateDia) {
-		super("imagej-fft");
+		super("imagej-fft","/image-filter/??.jar","hadoop.??");
 		this.ijfilterInput = inputDir;
 		this.ijfilterOutput = outputDir;
 		this.fftLargeDia = largeDia;
@@ -63,7 +62,7 @@ public class ImageJFFTDTO extends DataTransferObject{
 			final String largeDia, final String smallDia, final String choices, 
 			final String tolDia, final String scalingDia, final String saturateDia, 
 			final String imageID, final String imageName) {
-		super("imagej-fft");
+		super("imagej-fft","/image-filter/??.jar","hadoop.??");
 		this.ijfilterInput = inputDir;
 		this.ijfilterOutput = outputDir;
 		this.fftLargeDia = largeDia;
@@ -121,5 +120,11 @@ public class ImageJFFTDTO extends DataTransferObject{
 		return "ImageJFFTDTO [ijfilterInput=" + ijfilterInput + ", ijfilterOutput=" + ijfilterOutput
 				+ ", largeDia=" + fftLargeDia + ", smallDia=" + fftSmallDia + ", choices=" + fftChoices
 				+ ", toleranceDia=" + fftTolDia + ", scalingDia=" + fftScalingDia + ", saturateDia=" + fftSaturateDia + "]";
+	}
+
+	@Override
+	public String[] getCommandParameters() {
+		return new String[] { this.getInputDir(), this.getOutputDir(), this.getLargeDia(), this.getSmallDia(),
+			this.getChoices(), this.getTolDia(), this.getScalingDia(), this.getSaturateDia()};
 	}
 }

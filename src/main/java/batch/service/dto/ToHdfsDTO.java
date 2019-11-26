@@ -6,7 +6,7 @@ public class ToHdfsDTO extends DataTransferObject{
     private String to;
 
     public ToHdfsDTO(){
-        super("to-hdfs");
+        super("to-hdfs","/dist-ftp/dist-ftp-all.jar",null);
         this.from = null;
         this.to = null;
     }
@@ -36,5 +36,10 @@ public class ToHdfsDTO extends DataTransferObject{
         sb.append(" ]");
 
         return sb.toString();
+    }
+
+    @Override
+    public String[] getCommandParameters() {
+        return new String[] {"toHdfs",this.getFrom(),this.getTo()};
     }
 }

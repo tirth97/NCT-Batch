@@ -5,7 +5,7 @@ public class HdfsCopyDTO extends DataTransferObject {
   private String to;
 
   public HdfsCopyDTO(){
-    super("hdfs-copy");
+    super("hdfs-copy","/hdfs-helper/hdfs-helper-all.jar",null);
     this.from = null;
     this.to = null;
   }
@@ -34,5 +34,10 @@ public class HdfsCopyDTO extends DataTransferObject {
     sb.append(" ]");
 
     return sb.toString();
+  }
+
+  @Override
+  public String[] getCommandParameters() {
+    return new String[] {"hdfsCopy",this.getFrom(),this.getTo()};
   }
 }

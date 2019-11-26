@@ -37,20 +37,20 @@ public class FeatureExtractionDTO extends DataTransferObject{
     private final String featureThreshold;
     private final String featureScalingFactor;
 
-    public FeatureExtractionDTO() {
-        super("feature-extraction");
+    public FeatureExtractionDTO(){
+        super("feature-extraction","/feature-extraction/feature-extraction-mr.jar","nctracer.Driver");
         this.inputDir = null;
         this.outputDir = null;
         this.featureFilterClass = null;
         this.featureNeighborhoodSize = null;
-        this.featureThreshold = null;
         this.featureScalingFactor = null;
+        this.featureThreshold = null;
     }
 
 
     public FeatureExtractionDTO(final String inputDir, final String outputDir, final String featureFilterClass,
                                 final String featureNeighborhoodSize, final String featureScalingFactor, final String featureThreshold) {
-        super("feature-extraction");
+        super("feature-extraction","/feature-extraction/feature-extraction-mr.jar","nctracer.Driver");
         this.inputDir = inputDir;
         this.outputDir = outputDir;
         this.featureFilterClass = featureFilterClass;
@@ -83,6 +83,7 @@ public class FeatureExtractionDTO extends DataTransferObject{
         return featureThreshold;
     }
 
+
     @Override
     public String toString() {
         return "FeatureExtractionDTO [" +
@@ -93,5 +94,11 @@ public class FeatureExtractionDTO extends DataTransferObject{
                 ", featureThreshold='" + featureThreshold + '\'' +
                 ", featureScalingFactor='" + featureScalingFactor + '\'' +
                 ']';
+    }
+
+    @Override
+    public String[] getCommandParameters() {
+        return new String[] { this.getInputDir(), this.getOutputDir(), this.getFeatureFilterClass(),
+            this.getFeatureNeighborhoodSize(), this.getFeatureThreshold(), this.getFeatureScalingFactor() };
     }
 }

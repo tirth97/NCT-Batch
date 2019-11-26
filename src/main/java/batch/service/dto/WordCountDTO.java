@@ -19,20 +19,20 @@ package batch.service.dto;
  * Defines and contains word count job parameters.
  * @author Joseph Sackett
  */
-public class WordCountDTO extends DataTransferObject { 
+public class WordCountDTO extends DataTransferObject{
 	/** Input directory. */
 	private final String inputDir;
 	/** Output directory. */
 	private final String outputDir;
 
 	public WordCountDTO() {
-		super("word-count");
+		super("word-count","/word-count/wc-mr.jar","wc.WordCount");
 		this.inputDir = null;
 		this.outputDir = null;
 	}
 
 	public WordCountDTO(final String inputDir, final String outputDir) {
-		super("word-count");
+		super("word-count","/word-count/wc-mr.jar","wc.WordCount");
 		this.inputDir = inputDir;
 		this.outputDir = outputDir;
 	}
@@ -48,5 +48,10 @@ public class WordCountDTO extends DataTransferObject {
 	@Override
 	public String toString() {
 		return "WordCountDTO [inputDir=" + inputDir + ", outputDir=" + outputDir + "]";
+	}
+
+	@Override
+	public String[] getCommandParameters() {
+		return new String[] { this.getInputDir(), this.getOutputDir() };
 	}
 }

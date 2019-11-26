@@ -4,7 +4,7 @@ public class HdfsDeleteDTO extends DataTransferObject {
   private String from;
 
   public HdfsDeleteDTO(){
-    super("hdfs-delete");
+    super("hdfs-delete","/hdfs-helper/hdfs-helper-all.jar",null);
     this.from = null;
   }
 
@@ -25,5 +25,10 @@ public class HdfsDeleteDTO extends DataTransferObject {
     sb.append(" ]");
 
     return sb.toString();
+  }
+
+  @Override
+  public String[] getCommandParameters() {
+    return new String[] {"hdfsDelete",this.getFrom()};
   }
 }

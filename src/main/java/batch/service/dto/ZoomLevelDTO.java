@@ -16,11 +16,12 @@
 package batch.service.dto;
 
 /**
+ * Data Transfer class for Zoom Level
  * Defines and contains Zoom Level job parameters.
  *
  * @author wilson.v@husky.neu.edu
  */
-public class ZoomLevelDTO extends DataTransferObject {
+public class ZoomLevelDTO extends DataTransferObject{
    // input directory
     private  String inputDir;
     // output directory
@@ -30,16 +31,16 @@ public class ZoomLevelDTO extends DataTransferObject {
     // dummy tile pixel intensity
     private  String intensity;
 
-    public ZoomLevelDTO(){
-        super("zoom-level");
+    public ZoomLevelDTO() {
+        super("zoom-level","/zoom-level/zoom-level-gradle-all.jar","zl.App");
         this.inputDir = null;
         this.outputDir = null;
         this.tileDim = null;
         this.intensity = null;
     }
 
-    public ZoomLevelDTO(String inputDir, String outputDir,String origin,String tileDim,String intensity) {
-        super("zoom-level");
+    public ZoomLevelDTO(String inputDir, String outputDir, String tileDim,String intensity) {
+        super("zoom-level","/zoom-level/zoom-level-gradle-all.jar","zl.App");
         this.inputDir = inputDir;
         this.outputDir = outputDir;
         this.tileDim = tileDim;
@@ -70,5 +71,11 @@ public class ZoomLevelDTO extends DataTransferObject {
                 ", tileDim='" + tileDim + '\'' +
                 ", intensity='" + intensity + '\'' +
                 ']';
+    }
+
+    @Override
+    public String[] getCommandParameters() {
+        return new String[] { this.getInputDir(), this.getOutputDir(), this.getTileDim(),
+            this.getIntensity() };
     }
 }

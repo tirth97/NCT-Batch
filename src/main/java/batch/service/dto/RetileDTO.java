@@ -13,7 +13,7 @@ public class RetileDTO extends DataTransferObject {
   private  String intensity;
 
   public RetileDTO() {
-    super("retiling");
+    super("retiling","/retiling/Retiling-all.jar","retiling.RetilingMR");
     this.inputStackDir = null;
     this.inputCsvDir = null;
     this.outputDir = null;
@@ -23,7 +23,7 @@ public class RetileDTO extends DataTransferObject {
 
   public RetileDTO(String inputStackDir, String inputCsvDir, String outputDir, String tileDim,
                    String intensity) {
-    super("retiling");
+    super("retiling","/retiling/Retiling-all.jar","retiling.RetilingMR");
     this.inputStackDir = inputStackDir;
     this.inputCsvDir = inputCsvDir;
     this.outputDir = outputDir;
@@ -60,5 +60,12 @@ public class RetileDTO extends DataTransferObject {
             ", tileDim='" + tileDim + '\'' +
             ", intensity='" + intensity + '\'' +
             ']';
+  }
+
+  @Override
+  public String[] getCommandParameters() {
+    return new String[] { this.getInputStackDir(),
+      this.getInputCsvDir(), this.getOutputDir(), this.getTileDim(),
+      this.getIntensity() };
   }
 }

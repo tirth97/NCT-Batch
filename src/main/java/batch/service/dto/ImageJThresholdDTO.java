@@ -28,8 +28,8 @@ public class ImageJThresholdDTO extends DataTransferObject{
 	private final String thresholdMethod;
 	private final String imageID, imageName;
 
-	public ImageJThresholdDTO(){
-		super("imagej-threshold");
+	public ImageJThresholdDTO() {
+		super("imagej-threshold","/image-filter/WholeImageIJThresholdWriteDB.jar","hadoop.wholefile.WholeImageIJThresholdDB");
 		this.ijfilterInput = null;
 		this.ijfilterOutput = null;
 		this.thresholdMethod = null;
@@ -38,7 +38,7 @@ public class ImageJThresholdDTO extends DataTransferObject{
 	}
 
 	public ImageJThresholdDTO(final String inputDir, final String outputDir, final String thresholdMethod) {
-		super("imagej-threshold");
+		super("imagej-threshold","/image-filter/WholeImageIJThresholdWriteDB.jar","hadoop.wholefile.WholeImageIJThresholdDB");
 		this.ijfilterInput = inputDir;
 		this.ijfilterOutput = outputDir;
 		this.thresholdMethod = thresholdMethod;
@@ -48,7 +48,7 @@ public class ImageJThresholdDTO extends DataTransferObject{
 
 	public ImageJThresholdDTO(final String inputDir, final String outputDir, final String thresholdMethod, 
 			final String imageID, final String imageName) {
-		super("imagej-threshold");
+		super("imagej-threshold","/image-filter/WholeImageIJThresholdWriteDB.jar","hadoop.wholefile.WholeImageIJThresholdDB");
 		this.ijfilterInput = inputDir;
 		this.ijfilterOutput = outputDir;
 		this.thresholdMethod = thresholdMethod;
@@ -80,5 +80,10 @@ public class ImageJThresholdDTO extends DataTransferObject{
 	public String toString() {
 		return "ImageJFFTDTO [ijfilterInput=" + ijfilterInput + ", ijfilterOutput=" + ijfilterOutput
 				+ ", thresholdMethod=" + thresholdMethod + "]";
+	}
+
+	@Override
+	public String[] getCommandParameters() {
+		return null;
 	}
 }

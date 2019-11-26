@@ -29,7 +29,7 @@ public class ImageJGaussianDTO extends DataTransferObject{
 	private final String imageID, imageName;
 
 	public ImageJGaussianDTO() {
-		super("imagej-gaussian");
+		super("imagej-gaussian","/image-filter/WholeImageFilterImageJ.jar","hadoop.wholefile.WholeImageFilterImageJ");
 		this.ijfilterInput = null;
 		this.ijfilterOutput = null;
 		this.gaussianSigmaX = null;
@@ -40,7 +40,7 @@ public class ImageJGaussianDTO extends DataTransferObject{
 	}
 
 	public ImageJGaussianDTO(final String inputDir, final String outputDir, final String sigmaX, final String sigmaY, final String sigmaZ) {
-		super("imagej-gaussian");
+		super("imagej-gaussian","/image-filter/WholeImageFilterImageJ.jar","hadoop.wholefile.WholeImageFilterImageJ");
 		this.ijfilterInput = inputDir;
 		this.ijfilterOutput = outputDir;
 		this.gaussianSigmaX = sigmaX;
@@ -52,7 +52,7 @@ public class ImageJGaussianDTO extends DataTransferObject{
 	
 	public ImageJGaussianDTO(final String inputDir, final String outputDir, final String sigmaX, final String sigmaY, final String sigmaZ, 
 			final String imageID, final String imageName) {
-		super("imagej-gaussian");
+		super("imagej-gaussian","/image-filter/WholeImageFilterImageJ.jar","hadoop.wholefile.WholeImageFilterImageJ");
 		this.ijfilterInput = inputDir;
 		this.ijfilterOutput = outputDir;
 		this.gaussianSigmaX = sigmaX;
@@ -94,5 +94,11 @@ public class ImageJGaussianDTO extends DataTransferObject{
 	public String toString() {
 		return "ImageJGaussianDTO [ijfilterInput=" + ijfilterInput + ", ijfilterOutput=" + ijfilterOutput
 				+ ", sigmaX=" + gaussianSigmaX + ", sigmaY=" + gaussianSigmaY + ", sigmaZ=" + gaussianSigmaZ + "]";
+	}
+
+	@Override
+	public String[] getCommandParameters() {
+		return new String[] { this.getInputDir(), this.getOutputDir(), this.getSigmaX(), this.getSigmaY(),
+			this.getSigmaZ(), this.getImageID(), this.getImageName() };
 	}
 }

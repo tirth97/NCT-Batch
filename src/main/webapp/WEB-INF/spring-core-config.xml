@@ -29,14 +29,7 @@
 	<bean id="propertyConfigurerJDBC" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="ignoreUnresolvablePlaceholders" value="true"/>
 		<property name="location">
-			<value>/WEB-INF/config.properties</value>
-		</property>
-	</bean>
-
-	<bean id="propertyConfigurerJMS" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="ignoreUnresolvablePlaceholders" value="true"/>
-		<property name="location">
-			<value>/WEB-INF/jms.properties</value>
+			<value>file:///config/config.properties</value>
 		</property>
 	</bean>
 	
