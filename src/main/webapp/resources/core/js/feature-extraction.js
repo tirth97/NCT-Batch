@@ -12,7 +12,7 @@ function launchFeatureExtraction(inputDir, outputDir, featureFilterClass,
 
     $.post({
         url: "featureExtraction",
-        contentType: "application/json",
+        contentType: "application/json",gradle
         data: dto,
         cache: false,
         timeout: 2000})

@@ -41,6 +41,7 @@ public  class DtoMapper{
         classMap.put("matlab-gaussian", MatlabGaussianDTO.class);
         classMap.put("feature-extract-match", FeatureExtractMatchDTO.class);
         classMap.put("kill-job",KillJobDTO.class);
+        classMap.put("auto-trace", AutoTraceDTO.class);
 
     }
 
