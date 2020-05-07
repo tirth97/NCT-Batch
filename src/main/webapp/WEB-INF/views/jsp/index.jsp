@@ -37,7 +37,7 @@
 
 </head>
 
-<body onload="initRefreshLogEntries(); initWordCountPlugin(); initMatrixMultPlugin(); initFeatureExtractionPlugin(); initImageStitchingPlugin(); initImageJFilterPlugin(); initMatRegPlugin(); initMatFilterPlugin();">
+<body onload="initRefreshLogEntries(); initWordCountPlugin(); initMatrixMultPlugin(); initFeatureExtractionPlugin(); initImageStitchingPlugin(); initImageJFilterPlugin(); initMatRegPlugin(); initMatFilterPlugin(); initAutoTracePlugin();">
 
 <div class="container-fluid">
 	<div class="row vertical-center">
@@ -71,8 +71,12 @@
 				<button class="btn btn-sm btn-default" id="featureExtractionButton">Setup Feature Extraction</button>
 			</div>
 			<div class="row no-gutters">
-				<label for="zoomLevelnButton">Zoom Level&nbsp;</label>
+				<label for="zoomLevelButton">Zoom Level&nbsp;</label>
 				<button class="btn btn-sm btn-default" id="zoomLevelButton">Setup Zoom Level</button>
+			</div>
+			<div class="row no-gutters">
+				<label for="autoTraceButton">Auto Trace&nbsp;</label>
+            	<button class="btn btn-sm btn-default" id="autoTraceButton">Setup Auto Trace</button>
 			</div>
 			<div class="row no-gutters">
 				<label for="imageStitchingButton">Image Stitching&nbsp;</label>
@@ -268,6 +272,91 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+
+
+
+<!-- Auto Trace Launch Dialog -->
+<div id="launchAutoTraceModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title"><span class='glyphicon glyphicon-info-sign text-success'></span>&nbsp;&nbsp;Auto Trace</h4>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="inputDirAT">Input Directory</label>
+						<input type="text" class="form-control" id="inputDirAT" value="${pluginRoot}/auto-trace/input">
+					</div>
+					<div class="form-group">
+                    	<label for="outputDirAT">OutputDirectory</label>
+                		<input type="text" class="form-control" id="outputDirAT" value="${pluginRoot}/auto-trace/output">
+       				</div>
+       				<div class="form-group">
+                         <label for="datasetIdAT">Dataset ID</label>
+                         <input type="text" class="form-control" id="datasetIdAT" value="114">
+                    </div>
+                    <div class="form-group">
+                          <label for="userIdAT">User ID</label>
+                          <input type="text" class="form-control" id="userIdAT" value="22">
+                    </div>
+                    <div class="form-group">
+                         <label for="originAT">Origin</label>
+                         <input type="text" class="form-control" id="originAT" value="1438,1207,42">
+                    </div>
+                    <div class="form-group">
+                         <label for="dimAT">Tile Dimension</label>
+                         <input type="text" class="form-control" id="dimAT" value="512,512,64">
+                    </div>
+                    <div class="form-group">
+						<label for="traceSetIdAT">Traceset Id</label>
+						<input type="text" class="form-control" id="traceSetIdAT" value="3">
+					</div>
+					<div class="form-group">
+						<label for="seedsMeshSizeAT">Seeds Mesh Size</label>
+						<input type="text" class="form-control" id="seedsMeshSizeAT" value="10">
+					</div>
+					<div class="form-group">
+						<label for="seedsIntensityThrAT">Seeds Intensity Threshold</label>
+						<input type="text" class="form-control" id="seedsIntensityThrAT" value="80">
+					</div>
+					<div class="form-group">
+						<label for="regionSizeThrAT">Region Size Threshold</label>
+						<input type="text" class="form-control" id="regionSizeThrAT" value="10">
+					</div>
+					<div class="form-group">
+						<label for="eliminateSmallTreesThrAT">Minimum Tree Size</label>
+						<input type="text" class="form-control" id="eliminateSmallTreesThrAT" value="200">
+					</div>
+					<div class="form-group">
+						<label for="eliminateTerminalBranchesThrAT">Minimum Terminal Branch Length</label>
+						<input type="text" class="form-control" id="eliminateTerminalBranchesThrAT" value="200">
+					</div>
+					<div class="form-group">
+						<label for="distanceThrAT">Maximum Distance</label>
+						<input type="text" class="form-control" id="distanceThrAT" value="20">
+					</div>
+					<div class="form-group">
+						<label for="cAT">Unassigned Connection Cost</label>
+						<input type="text" class="form-control" id="cAT" value="10">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" data-dismiss="modal">Launch</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
 
 <!-- Image Stitching Launch Dialog -->
 <div id="launchImageStitchingModal" class="modal fade">
@@ -541,6 +630,9 @@
 
 <spring:url value="/resources/core/js/zoom-level.js" var="zoomLevelJs" />
 <script src="${zoomLevelJs}"></script>
+
+<spring:url value="/resources/core/js/auto-trace.js" var="autoTraceJs"/>
+<script src="${autoTraceJs}"></script>
 
 <spring:url value="/resources/core/js/image-stitching.js" var="imageStitchingJs" />
 <script src="${imageStitchingJs}"></script>

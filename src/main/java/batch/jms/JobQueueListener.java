@@ -81,7 +81,7 @@ public class JobQueueListener implements MessageListener {
 			String jobName = dto.getJob();
 			// default result
 			JMSMessage result = new JMSMessage(dto.getToken(), "No job configured for: " + jobName, statusValues.UNKNOWN);
-           
+
 			final Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			final TextMessage textMessageOut = session.createTextMessage();
 

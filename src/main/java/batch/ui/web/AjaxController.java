@@ -17,10 +17,12 @@ package batch.ui.web;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 
+import batch.service.dto.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +33,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import batch.service.QueueService;
-import batch.service.dto.ImageStitchingDTO;
-import batch.service.dto.MatlabGaussianDTO;
-import batch.service.dto.FeatureExtractionDTO;
-import batch.service.dto.ImageJFFTDTO;
-import batch.service.dto.ImageJGaussianDTO;
-import batch.service.dto.ImageJThresholdDTO;
-import batch.service.dto.MatrixMultDTO;
-import batch.service.dto.WordCountDTO;
-import batch.service.dto.ZoomLevelDTO;
 
 /**
  * Spring MVC main controller for batch web application's Ajax calls.
@@ -103,6 +96,17 @@ public class AjaxController {
 		logger.debug(DTO);
 		queueService.sendMessage(DTO);
 		logger.debug("/zoomLevel request from [Session Id: " + session.getId() + "] complete.");
+	}
+
+	/** Service to run auto trace batch job. */
+	@RequestMapping(value = "/autoTrace", method = RequestMethod.POST)
+	public void autoTrace(@RequestBody final AutoTraceDTO atDTO, final HttpSession session) {
+		// generate universally unique ID
+		atDTO.setToken(UUID.randomUUID().toString());
+		logger.debug("/autoTrace request from [Session Id: " + session.getId() + ']');
+		logger.debug(atDTO);
+		queueService.sendMessage(atDTO);
+		logger.debug("/autoTrace request from [Session Id: " + session.getId() + "] complete.");
 	}
 
 	/** Service to run feature extraction batch job. */
