@@ -30,7 +30,6 @@
 		<property name="ignoreUnresolvablePlaceholders" value="true"/>
 		<property name="location">
 			<value>file:///config/config.properties</value>
-<!--			<value>file:///Users/xuying/OneDrive/2020Spring/Project/NCT-Batch/src/main/webapp/WEB-INF/config.properties</value>-->
 		</property>
 	</bean>
 	
