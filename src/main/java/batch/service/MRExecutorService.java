@@ -50,14 +50,6 @@ public class MRExecutorService {
 		} else {
 			args = packVarArgs(hadoopRoot + "/bin/hadoop", "jar", jarName, mainClassName, dto.getToken(),
 					dto.getCommandParameters());
-
-			// todo, delete
-			logger.info(dto.getCommandParameters().length);
-			for (String arg : dto.getCommandParameters()) {
-				logger.info(arg);
-			}
-			logger.info(args.length);
-
 		}
 
 		ProcessBuilder processBuilder = new ProcessBuilder(args);
