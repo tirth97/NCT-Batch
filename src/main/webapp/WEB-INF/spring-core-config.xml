@@ -29,7 +29,7 @@
 	<bean id="propertyConfigurerJDBC" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="ignoreUnresolvablePlaceholders" value="true"/>
 		<property name="location">
-			<value>file:///config/config.properties</value>
+			<value>file:///home/sujil/summer2020/NCT-Batch/src/main/webapp/WEB-INF/config.properties</value>
 		</property>
 	</bean>
 	

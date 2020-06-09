@@ -3,3 +3,6 @@
 
 /build
 /.gradle
+
+*.class
+activemq-data/localhost/*

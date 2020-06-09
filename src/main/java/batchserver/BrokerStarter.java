@@ -4,7 +4,7 @@ import org.apache.activemq.broker.BrokerService;
 
 public class BrokerStarter {
 
-	protected static String cmd_url = "tcp://activemq:61616";
+	protected static String cmd_url = "tcp://localhost:61616";
 
 	public static void initCmdBroker() throws Exception {
 		final BrokerService broker = new BrokerService();
